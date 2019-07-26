@@ -1,1 +1,1 @@
-### simple example of web framework internals using socket
+### simple example of web app internals using socket lib only
