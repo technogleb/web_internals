@@ -1,5 +1,6 @@
 import socket
 from views import *
+from threading import Thread
 
 URLS = {
     '/': index,
@@ -46,13 +47,21 @@ def run():
     # enable server to accept connections
     server_socket.listen()
 
-    while True:
-        # allow accept incoming connections
-        client_socket, client_addr = server_socket.accept()
-        request = client_socket.recv(1024)
-        response = generate_response(request.decode('utf-8'))
-        client_socket.sendall(response.encode())
-        client_socket.close()
+    def cycle():
+        while True:
+            # wait for incoming connection
+            client_socket, client_addr = server_socket.accept()
+            request = client_socket.recv(1024)
+            response = generate_response(request.decode('utf-8'))
+            client_socket.sendall(response.encode())
+            client_socket.close()
+
+    t1 = Thread(target=cycle)
+    t2 = Thread(target=cycle)
+    t1.start()
+    t2.start()
+    t1.join()
+    t2.join()
 
 
 if __name__ == "__main__":

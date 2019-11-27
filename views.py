@@ -1,4 +1,5 @@
 import os.path
+import time
 
 __all__ = ['index', 'article']
 
@@ -9,6 +10,7 @@ def render_template(template):
 
 
 def index():
+    time.sleep(5)
     return render_template('index')
 
 
