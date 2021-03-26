@@ -10,7 +10,7 @@ def render_template(template):
 
 
 def index():
-    time.sleep(5)
+    time.sleep(7)
     return render_template('index')
 
 

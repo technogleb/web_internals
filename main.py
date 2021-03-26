@@ -16,7 +16,7 @@ def generate_response(request):
 
 def generate_headers(method, url):
     if method != 'GET':
-        return 'HTTP/1.1 405 Method not allowed\n\n', 405
+        return 'HTTP/1.1 405 Metlhod not allowed\n\n', 405
     if url not in URLS:
         return 'HTTP/1.1 404 Not found\n\n', 404
 
@@ -34,7 +34,7 @@ def generate_body(url, code):
 
 def parse_request(request):
     """Gets method and url out of request."""
-    method, url = request.split(' ')[0], request.split(' ')[1]
+    method, url = request.split(' ')[:2]
     return method, url
 
 
